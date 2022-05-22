@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Todo from "./Components/Todo";
+import Complited from "./Components/Complited";
+import { useState } from "react";
 
 function App() {
+  const [toggle, setToggle] = useState(false);
+  const [data, setData] = useState([]); //""
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Todo data={data} setData={setData}></Todo>
+      <div>
+        <button
+          style={{
+            padding: `8px`,
+            borderRadius: `6px`,
+            border: `transparent`,
+            backgroundColor: `teal`,
+            color: `white`,
+            marginTop: `10px`,
+          }}
+          onClick={() => {
+            if (toggle === true) {
+              setToggle(false);
+            } else {
+              setToggle(true);
+            }
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          {toggle ? "HIDE COMPLETED TO-DOS" : "SHOW COMPLETED TO-DOS"}
+        </button>
+        {toggle ? <Complited data={data} /> : null}
+      </div>
     </div>
   );
 }
