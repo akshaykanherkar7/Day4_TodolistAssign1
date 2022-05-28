@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TodoInput = ({ value, deleteTodo }) => {
+const TodoInput = ({ status, value, deleteTodo }) => {
   const [line, setLine] = useState(false);
 
   return (
@@ -14,26 +14,36 @@ const TodoInput = ({ value, deleteTodo }) => {
     >
       <div style={{ display: `flex`, gap: `12px`, marginLeft: `-35px` }}>
         <div>
-          <input
-            type="checkbox"
-            onClick={() => {
-              if (line === false) {
-                setLine(true);
-              } else {
-                setLine(false);
-              }
-            }}
-          />
+          {status ? (
+            <div>
+              <input type="checkbox" defaultChecked />
+            </div>
+          ) : (
+            <input
+              type="checkbox"
+              onClick={() => {
+                if (line === false) {
+                  setLine(true);
+                } else {
+                  setLine(false);
+                }
+              }}
+            />
+          )}
         </div>
-        <div
-          style={
-            line === true
-              ? { textDecoration: `line-through` }
-              : { textDecoration: `none` }
-          }
-        >
-          {value}
-        </div>
+        {status ? (
+          <div style={{ textDecoration: `line-through` }}>{value}</div>
+        ) : (
+          <div
+            style={
+              line === true
+                ? { textDecoration: `line-through` }
+                : { textDecoration: `none` }
+            }
+          >
+            {value}
+          </div>
+        )}
       </div>
       <button
         style={{

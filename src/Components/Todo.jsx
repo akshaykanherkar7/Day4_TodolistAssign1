@@ -50,6 +50,7 @@ const Todo = ({ data, setData }) => {
       {
         id: uuidv4(),
         value: value,
+        status: true,
       },
     ]);
   };
